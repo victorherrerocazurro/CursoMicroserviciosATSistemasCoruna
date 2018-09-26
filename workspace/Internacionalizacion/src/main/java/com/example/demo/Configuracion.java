@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -21,7 +22,7 @@ public class Configuracion implements WebMvcConfigurer{
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
 		
-		sessionLocaleResolver.setLocaleAttributeName("locale");
+		//sessionLocaleResolver.setLocaleAttributeName("locale");
 		sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
 		
 		return sessionLocaleResolver;
@@ -48,7 +49,8 @@ public class Configuracion implements WebMvcConfigurer{
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
 		
-		reloadableResourceBundleMessageSource.setBasenames("message");
+		reloadableResourceBundleMessageSource.setBasenames("classpath:messages");
+		reloadableResourceBundleMessageSource.setFallbackToSystemLocale(false);
 		
 		return reloadableResourceBundleMessageSource;
 	}
